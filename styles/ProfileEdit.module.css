@@ -1,0 +1,30 @@
+.root {
+  display: flex;
+  margin: min(10vh, 5rem) auto;
+  max-width: 30vw;
+}
+.details {
+  margin: 2rem 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.content {
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
+}
+.controls {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0 !important;
+}
+
+.input {
+  width: 100%;
+  margin-top: 1rem !important;
+}

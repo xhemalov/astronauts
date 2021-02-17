@@ -28,6 +28,7 @@ module.exports = {
     project: "./tsconfig.json",
   },
   rules: {
+    semi: 0,
     "linebreak-style": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
@@ -38,4 +39,4 @@ module.exports = {
       },
     ],
   },
-};
+}

@@ -1,0 +1,21 @@
+.root {
+  display: flex;
+  margin: 0.5rem;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+.content {
+  flex: 1 0 auto;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text {
+  margin-top: 1rem !important;
+}
