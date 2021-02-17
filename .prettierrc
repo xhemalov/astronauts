@@ -1,0 +1,26 @@
+{
+  "printWidth": 120,
+  "semi": false,
+  "overrides": [
+    {
+      "files": "*.{js,ts,tsx}",
+      "options": {
+        "singleQuote": false,
+        "trailingComma": "all",
+        "parser": "typescript"
+      }
+    },
+    {
+      "files": "*.json",
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": "*.{scss,css}",
+      "options": {
+        "parser": "css"
+      }
+    }
+  ]
+}
