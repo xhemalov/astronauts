@@ -8,11 +8,11 @@ module.exports = {
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
   ],
-  plugins: ["react", "@typescript-eslint", "jest"],
+  plugins: ["react", "@typescript-eslint", "prettier"],
   env: {
     browser: true,
     es6: true,
-    jest: true,
+    es2021: true,
   },
   globals: {
     Atomics: "readonly",
@@ -23,7 +23,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 12,
     sourceType: "module",
     project: "./tsconfig.json",
   },
@@ -36,6 +36,7 @@ module.exports = {
       "error",
       {
         endOfLine: "auto",
+        semi: 0
       },
     ],
   },
