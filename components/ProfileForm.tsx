@@ -19,7 +19,7 @@ const ProfileForm: FC<ProfileFormPros> = ({ astronaut, onConfirm }) => {
   const [firstName, setFirstName] = useState(astronaut ? astronaut.firstName : "")
   const [lastName, setLastName] = useState(astronaut ? astronaut.lastName : "")
   const [birthday, setBirthday] = useState<Date | undefined | null>(
-    astronaut ? astronaut.birthday : new Date(Date.now()),
+    astronaut?.birthday ? new Date(astronaut.birthday) : new Date(Date.now()),
   )
   const [ability, setAbility] = useState(astronaut ? astronaut.ability : "")
 
