@@ -1,27 +1,33 @@
 import Head from "next/head"
-import styles from "../styles/Home.module.css"
-import ProfileCard from "../components/ProfileCard"
-import Layout from "../components/Layout"
+import { useState, useEffect } from "react"
+
+import { Button, Typography } from "@material-ui/core"
+import AddIcon from "@material-ui/icons/Add"
+import Link from "next/link"
 import { Astronaut, faunaQueries } from "../utils/query-manager"
-import { useState } from "react"
-import { useEffect } from "react"
+import Layout from "../components/Layout"
+import ProfileCard from "../components/ProfileCard"
+import styles from "../styles/Home.module.css"
 
 export default function Home() {
-  /*
   const [state, setState] = useState({
     astronauts: [] as Astronaut[],
   })
 
-  useEffect(() => {
+  const getAstronauts = () => {
     faunaQueries.getAstronauts().then((result) => {
-      console.log("astronauts", result)
       setState({
         astronauts: result,
       })
     })
-  }, [])
-  */
-  faunaQueries.updateAstronaut({ _id: "290813718733783559", firstName: "Pepa", lastName: "Ponožka", ability: "bafání" })
+  }
+  useEffect(getAstronauts, [])
+
+  const onDelete = async (id: string) => {
+    await faunaQueries.deleteAstronaut(id)
+    getAstronauts()
+  }
+
   return (
     <Layout>
       <Head>
@@ -29,20 +35,31 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Awesome Astronauts</h1>
-        <div className={styles.grid}>
-          <ProfileCard />
-          <ProfileCard />
-          <ProfileCard />
-          <ProfileCard />
-          <ProfileCard />
-          <ProfileCard />
-          <ProfileCard />
-          <ProfileCard />
-          <ProfileCard />
-          <ProfileCard />
-          <ProfileCard />
-        </div>
+        <Typography variant="h2">Awesome Astronauts</Typography>
+        {state.astronauts.length === 0 ? (
+          <>
+            <Typography>You currently do not have astronauts. Please add some.</Typography>
+            <Link href="/profile/add" passHref>
+              <Button variant="contained" color="primary" size="large" className={styles.add}>
+                <AddIcon /> Add
+              </Button>
+            </Link>
+          </>
+        ) : (
+          <>
+            <div className={styles.grid}>
+              {state.astronauts.map((r) => (
+                <ProfileCard key={r._id} astronaut={r} onDelete={() => onDelete(r._id)} />
+              ))}
+            </div>
+            <Typography>You can add new astronaut</Typography>
+            <Link href="/profile/add" passHref>
+              <Button variant="contained" color="primary" size="large" className={styles.add}>
+                <AddIcon /> Add
+              </Button>
+            </Link>
+          </>
+        )}
       </main>
     </Layout>
   )
