@@ -16,7 +16,7 @@ export type Astronaut = {
 } & AstronautInput
 
 function normalizeDate(date?: Date | null): string {
-  return format(date || new Date(Date.now()), "dd/MM/yyyy")
+  return format(date || new Date(Date.now()), "MM/dd/yyyy")
 }
 
 class QueryManager {
