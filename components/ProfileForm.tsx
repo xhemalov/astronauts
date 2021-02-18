@@ -48,7 +48,7 @@ const ProfileForm: FC<ProfileFormPros> = ({ astronaut, onConfirm }) => {
             <KeyboardDatePicker
               disableToolbar
               variant="inline"
-              format="dd/MM/yyyy"
+              format="MM/dd/yyyy"
               margin="normal"
               id="date-picker-inline"
               label="Birthday"
