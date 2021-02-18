@@ -1,42 +1,22 @@
+import format from "date-fns/format"
 import faunadb from "faunadb"
 
 const q = faunadb.query
-const {
-  Call,
-  Create,
-  Collection,
-  Identity,
-  Paginate,
-  Documents,
-  Lambda,
-  Get,
-  Var,
-  Select,
-  Let,
-  Match,
-  Index,
-  Join,
-  If,
-  Exists,
-  Update,
-  Do,
-  Add,
-  Subtract,
-  Not,
-  Contains,
-  Abort,
-  Now,
-  Ref,
-  Delete,
-  Map,
-} = q
+const { Create, Collection, Paginate, Documents, Lambda, Get, Var, Update, Ref, Delete, Map } = q
+
+export type AstronautInput = {
+  firstName: string
+  lastName: string
+  birthday?: Date | null
+  ability?: string
+}
 
 export type Astronaut = {
   _id: string
-  firstName: string
-  lastName: string
-  birthDate?: Date
-  ability?: string
+} & AstronautInput
+
+function normalizeDate(date?: Date | null): string {
+  return format(date || new Date(Date.now()), "dd/MM/yyyy")
 }
 
 class QueryManager {
@@ -48,19 +28,18 @@ class QueryManager {
     // A client is just a wrapper, it does not create a persitant connection
     // FaunaDB behaves like an API and will include the token on each request.
     this.bootstrapToken = token || (process.env.NEXT_PUBLIC_FAUNA_TOKEN as string)
-    console.log(this.bootstrapToken)
     this.client = new faunadb.Client({
       secret: token || this.bootstrapToken,
     })
   }
 
-  createAstronaut(firstName: string, lastName: string, birthday?: Date, ability?: string): Promise<Astronaut> {
+  createAstronaut(firstName: string, lastName: string, birthday?: Date | null, ability?: string): Promise<Astronaut> {
     const FQLStatement = Create(Collection("astronauts"), {
       data: {
-        firstName: firstName,
-        lastName: lastName,
-        birthday: birthday,
-        ability: ability,
+        firstName,
+        lastName,
+        birthday: normalizeDate(birthday),
+        ability,
       },
     })
     return this.client.query(FQLStatement)
@@ -76,7 +55,7 @@ class QueryManager {
       data: {
         firstName: data.firstName,
         lastName: data.lastName,
-        birthday: data.birthDate,
+        birthday: normalizeDate(data.birthday),
         ability: data.ability,
       },
     })
@@ -92,6 +71,18 @@ class QueryManager {
       })),
     )
   }
+
+  getAstronaut(id: string): Promise<Astronaut> {
+    const FQLStatement = Get(Ref(Collection("astronauts"), id))
+    return this.client.query<{ data: any; ref: any }>(FQLStatement).then((result) => ({
+      _id: result.ref.value.id,
+      firstName: result.data.firstName,
+      lastName: result.data.lastName,
+      birthday: result.data.birthday,
+      ability: result.data.ability,
+    }))
+  }
 }
+
 const faunaQueries = new QueryManager()
 export { faunaQueries, QueryManager }

@@ -8,30 +8,33 @@ import DeleteIcon from "@material-ui/icons/Delete"
 import EditIcon from "@material-ui/icons/Edit"
 import Link from "next/link"
 import styles from "../styles/ProfileCard.module.css"
+import { Astronaut } from "../utils/query-manager"
 
-const ProfileCard: FC = () => {
+type ProfileCardProps = { astronaut: Astronaut; onDelete: () => void }
+
+const ProfileCard: FC<ProfileCardProps> = ({ astronaut, onDelete }) => {
   return (
     <Card className={styles.root}>
       <div className={styles.details}>
         <CardContent className={styles.content}>
           <Typography component="h5" variant="h5">
-            Pepa Ponožka
+            {astronaut.firstName} {astronaut.lastName}
           </Typography>
           <Typography variant="caption" display="block" color="textSecondary" className={styles.text}>
             Birthday:
           </Typography>
 
-          <Typography variant="subtitle1">30.2.1991</Typography>
+          <Typography variant="subtitle1">{astronaut.birthday}</Typography>
           <Typography variant="caption" display="block" color="textSecondary" className={styles.text}>
             Ability:
           </Typography>
-          <Typography variant="subtitle1">šťouchání brambor</Typography>
+          <Typography variant="subtitle1">{astronaut.ability}</Typography>
         </CardContent>
         <CardActions className={styles.controls}>
-          <Button>
+          <Button onClick={onDelete}>
             <DeleteIcon />
           </Button>
-          <Link href="/ProfileUpdate" passHref>
+          <Link href={`/profile/${astronaut._id}`} passHref>
             <Button>
               <EditIcon />
             </Button>

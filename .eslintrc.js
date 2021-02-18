@@ -29,6 +29,8 @@ module.exports = {
   },
   rules: {
     semi: 0,
+    "react/prop-types": 0,
+    "no-underscore-dangle": 0,
     "linebreak-style": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-props-no-spreading": "off",
@@ -36,7 +38,7 @@ module.exports = {
       "error",
       {
         endOfLine: "auto",
-        semi: 0
+        semi: false,
       },
     ],
   },
