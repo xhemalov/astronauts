@@ -47,6 +47,7 @@ const ProfileForm: FC<ProfileFormPros> = ({ astronaut, onConfirm }) => {
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
               disableToolbar
+              disableFuture
               variant="inline"
               format="MM/dd/yyyy"
               margin="normal"

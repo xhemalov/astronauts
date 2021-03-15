@@ -47,17 +47,17 @@ export default function Home() {
           </>
         ) : (
           <>
-            <div className={styles.grid}>
-              {state.astronauts.map((r) => (
-                <ProfileCard key={r._id} astronaut={r} onDelete={() => onDelete(r._id)} />
-              ))}
-            </div>
             <Typography>You can add new astronaut</Typography>
             <Link href="/profile/add" passHref>
               <Button variant="contained" color="primary" size="large" className={styles.add}>
                 <AddIcon /> Add
               </Button>
             </Link>
+            <div className={styles.grid}>
+              {state.astronauts.map((r) => (
+                <ProfileCard key={r._id} astronaut={r} onDelete={() => onDelete(r._id)} />
+              ))}
+            </div>
           </>
         )}
       </main>
