@@ -29,7 +29,13 @@ const ProfileEdit: FC<Props> = ({ astronaut }) => {
       </Head>
 
       <main>
-        <ProfileForm astronaut={astronaut} onConfirm={onConfirm} />
+        <ProfileForm
+          astronaut={astronaut}
+          onConfirm={onConfirm}
+          onRandom={() => {
+            throw new Error("Funkce random nebyla nalezena")
+          }}
+        />
       </main>
     </Layout>
   )
