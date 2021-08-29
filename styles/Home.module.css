@@ -19,3 +19,11 @@
 .add {
   margin-top: 2rem;
 }
+
+.failed {
+  float: left;
+}
+
+.awesome {
+  display: inline;
+}

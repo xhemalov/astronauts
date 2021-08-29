@@ -35,7 +35,10 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Typography variant="h2">Awesome Astronauts</Typography>
+        <img className={styles.failed} src="/rocket.png" alt="&nbsp;" />
+        <Typography className={styles.awesome} variant="h2">
+          Awesome Astronauts
+        </Typography>
         {state.astronauts.length === 0 ? (
           <>
             <Typography>You currently do not have astronauts. Please add some.</Typography>

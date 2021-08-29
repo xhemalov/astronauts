@@ -1,6 +1,7 @@
 .root {
   display: flex;
   margin: 0.5rem;
+  width: 15.5rem;
 }
 .details {
   display: flex;

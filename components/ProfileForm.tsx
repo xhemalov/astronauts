@@ -13,9 +13,10 @@ import { Astronaut, AstronautInput } from "../utils/query-manager"
 type ProfileFormPros = {
   astronaut?: Astronaut
   onConfirm: (astronaut: AstronautInput) => void
+  onRandom: () => void
 }
 
-const ProfileForm: FC<ProfileFormPros> = ({ astronaut, onConfirm }) => {
+const ProfileForm: FC<ProfileFormPros> = ({ astronaut, onConfirm, onRandom }) => {
   const [firstName, setFirstName] = useState(astronaut ? astronaut.firstName : "")
   const [lastName, setLastName] = useState(astronaut ? astronaut.lastName : "")
   const [birthday, setBirthday] = useState<Date | undefined | null>(
@@ -68,6 +69,13 @@ const ProfileForm: FC<ProfileFormPros> = ({ astronaut, onConfirm }) => {
           />
         </CardContent>
         <CardActions className={styles.controls}>
+          {!astronaut && (
+            <>
+              <Button variant="contained" color="primary" onClick={() => onRandom()}>
+                Random
+              </Button>
+            </>
+          )}
           <Link href="/" passHref>
             <Button>Back</Button>
           </Link>

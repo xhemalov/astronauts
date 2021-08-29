@@ -19,7 +19,12 @@ const ProfileAdd: FC = () => {
       </Head>
 
       <main>
-        <ProfileForm onConfirm={onConfirm} />
+        <ProfileForm
+          onConfirm={onConfirm}
+          onRandom={() => {
+            throw new Error("Function not found")
+          }}
+        />
       </main>
     </Layout>
   )
