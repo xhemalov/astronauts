@@ -9,20 +9,20 @@ Nejskvělejší astronauti je nasazený na **[https://astronauts.vercel.app/]**.
 ### Prerekvizity:
 Nainstalovaný Node.js a npm.
 
-1. Clone the repository:
+1. Naklonojuj si repozitář:
 ```bash
 git clone https://github.com/xhemalov/astronauts.git
 ```
-2. Install project:
+2. Naistaluj si projekt:
 ```bash
 npm -i
 ```
 
-### Running project after you have it locally:
-1.Run the development server:
+### Spuštění projektu po té, co ho máte lokálně:
+1. Spušť si server pro vývoj:
 
 ```bash
 npm run dev
 ```
 
-2. Open http://localhost:3000 with your browser to see the result.
+2. Otevři prohlížeč na adrase [http://localhost:3000](http://localhost:3000) a prohlédni si výsledek.
