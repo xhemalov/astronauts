@@ -9,18 +9,23 @@ Awesome Astronauts is deployed on **[https://astronauts.vercel.app/]**.
 ## How to use locally
 
 ### Prerequisite steps:
+
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/xhemalov/astronauts.git
 ```
 
 2. Install project:
+
 ```bash
 npm -i
 ```
 
 ### Running project after you have it locally:
+
 1. Run the development server:
+
 ```bash
 npm run dev
 # or
