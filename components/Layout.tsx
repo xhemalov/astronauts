@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Typography from "@material-ui/core/Typography"
-import styles from "../styles/layout.module.css"
 import Link from "next/link"
+import styles from "../styles/layout.module.css"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
