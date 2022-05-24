@@ -4,14 +4,14 @@ import { useState, useEffect } from "react"
 import { Button, Typography } from "@material-ui/core"
 import AddIcon from "@material-ui/icons/Add"
 import Link from "next/link"
-import { Astronaut, faunaQueries } from "../utils/query-manager"
+import { faunaQueries, ProcessedAstrounaut } from "../utils/query-manager"
 import Layout from "../components/Layout"
 import ProfileCard from "../components/ProfileCard"
 import styles from "../styles/Home.module.css"
 
 export default function Home() {
   const [state, setState] = useState({
-    astronauts: [] as Astronaut[],
+    astronauts: [] as ProcessedAstrounaut[],
   })
 
   const getAstronauts = () => {
@@ -25,6 +25,11 @@ export default function Home() {
 
   const onDelete = async (id: string) => {
     await faunaQueries.deleteAstronaut(id)
+    getAstronauts()
+  }
+
+  const onCopy = async (astronaut: ProcessedAstrounaut) => {
+    await faunaQueries.copyAstronaut(astronaut.firstName, astronaut.lastName, astronaut.birthday, astronaut.ability)
     getAstronauts()
   }
 
@@ -58,7 +63,7 @@ export default function Home() {
             </Link>
             <div className={styles.grid}>
               {state.astronauts.map((r) => (
-                <ProfileCard key={r._id} astronaut={r} onDelete={() => onDelete(r._id)} />
+                <ProfileCard key={r._id} astronaut={r} onDelete={() => onDelete(r._id)} onCopy={() => onCopy(r)} />
               ))}
             </div>
           </>

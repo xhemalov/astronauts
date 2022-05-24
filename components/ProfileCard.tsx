@@ -4,6 +4,7 @@ import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
 import CardActions from "@material-ui/core/CardActions"
+import FileCopyIcon from "@material-ui/icons/FileCopy"
 import DeleteIcon from "@material-ui/icons/Delete"
 import EditIcon from "@material-ui/icons/Edit"
 import Link from "next/link"
@@ -14,11 +15,11 @@ import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
 import styles from "../styles/ProfileCard.module.css"
-import { Astronaut } from "../utils/query-manager"
+import { ProcessedAstrounaut } from "../utils/query-manager"
 
-type ProfileCardProps = { astronaut: Astronaut; onDelete: () => void }
+type ProfileCardProps = { astronaut: ProcessedAstrounaut; onDelete: () => void; onCopy: () => void }
 
-const ProfileCard: FC<ProfileCardProps> = ({ astronaut, onDelete }) => {
+const ProfileCard: FC<ProfileCardProps> = ({ astronaut, onDelete, onCopy }) => {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -47,11 +48,14 @@ const ProfileCard: FC<ProfileCardProps> = ({ astronaut, onDelete }) => {
             <Typography variant="subtitle1">{astronaut.ability}</Typography>
           </CardContent>
           <CardActions className={styles.controls}>
-            <Button onClick={handleClickOpen}>
+            <Button onClick={handleClickOpen} title="Delete">
               <DeleteIcon />
             </Button>
+            <Button onClick={onCopy} title="Copy">
+              <FileCopyIcon />
+            </Button>
             <Link href={`/profile/${astronaut._id}`} passHref>
-              <Button>
+              <Button title="Edit">
                 <EditIcon />
               </Button>
             </Link>

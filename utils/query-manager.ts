@@ -15,6 +15,8 @@ export type Astronaut = {
   _id: string
 } & AstronautInput
 
+export type ProcessedAstrounaut = Astronaut & { birthday: string }
+
 function normalizeDate(date?: Date | null): string {
   return format(date || new Date(Date.now()), "MM/dd/yyyy")
 }
@@ -45,12 +47,24 @@ class QueryManager {
     return this.client.query(FQLStatement)
   }
 
+  copyAstronaut(firstName: string, lastName: string, birthday?: string, ability?: string): Promise<Astronaut> {
+    const FQLStatement = Create(Collection("astronauts"), {
+      data: {
+        firstName,
+        lastName,
+        birthday,
+        ability,
+      },
+    })
+    return this.client.query(FQLStatement)
+  }
+
   deleteAstronaut(id: string): Promise<void> {
     const FQLStatement = Delete(Ref(Collection("astronauts"), id))
     return this.client.query(FQLStatement)
   }
 
-  updateAstronaut(data: Astronaut) {
+  updateAstronaut(data: Astronaut): Promise<ProcessedAstrounaut> {
     const FQLStatement = Update(Ref(Collection("astronauts"), data._id), {
       data: {
         firstName: data.firstName,
@@ -62,7 +76,7 @@ class QueryManager {
     return this.client.query(FQLStatement)
   }
 
-  getAstronauts(): Promise<Astronaut[]> {
+  getAstronauts(): Promise<ProcessedAstrounaut[]> {
     const FQLStatement = Map(Paginate(Documents(Collection("astronauts"))), Lambda("X", Get(Var("X"))))
     return this.client.query<{ data: any[] }>(FQLStatement).then((result) =>
       result.data.map((v) => ({
@@ -72,7 +86,7 @@ class QueryManager {
     )
   }
 
-  getAstronaut(id: string): Promise<Astronaut> {
+  getAstronaut(id: string): Promise<ProcessedAstrounaut> {
     const FQLStatement = Get(Ref(Collection("astronauts"), id))
     return this.client.query<{ data: any; ref: any }>(FQLStatement).then((result) => ({
       _id: result.ref.value.id,
