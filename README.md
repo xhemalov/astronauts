@@ -21,7 +21,7 @@ git clone https://github.com/xhemalov/astronauts.git
 3. Nainstaluj si projekt:
 
 ```bash
-npm -i
+npm i
 ```
 
 ### Spuštění projektu poté, co ho máš lokálně:

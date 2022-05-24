@@ -19,7 +19,7 @@ git clone https://github.com/xhemalov/astronauts.git
 2. Install project:
 
 ```bash
-npm -i
+npm i
 ```
 
 ### Running project after you have it locally:
