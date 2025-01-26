@@ -40,7 +40,7 @@ const ProfileCard: FC<ProfileCardProps> = ({ astronaut, onDelete }) => {
               Birthday:
             </Typography>
 
-            <Typography variant="subtitle1">{astronaut.birthday?.toLocaleDateString()}</Typography>
+            <Typography variant="subtitle1">{astronaut.birthday}</Typography>
             <Typography variant="caption" display="block" color="textSecondary" className={styles.text}>
               Ability:
             </Typography>

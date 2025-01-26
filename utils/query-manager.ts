@@ -7,7 +7,7 @@ const { Create, Collection, Paginate, Documents, Lambda, Get, Var, Update, Ref, 
 export type AstronautInput = {
   firstName: string
   lastName: string
-  birthday?: Date | null
+  birthday?: any | null
   ability?: string
 }
 
